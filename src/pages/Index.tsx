@@ -190,11 +190,11 @@ const Index = () => {
       </section>
 
       {/* About Me Section */}
-      <section className={`py-20 px-4 fade-in-section section-about ${visibleSections.has('about') ? 'visible' : ''}`} data-section="about">
+      <section className={`py-20 px-4 fade-in-section ${visibleSections.has('about') ? 'visible' : ''}`} data-section="about">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
             <User className="w-8 h-8" style={{ color: 'hsl(var(--section-about-glow))' }} />
-            <h2 className="text-4xl font-bold">About Me</h2>
+            <h2 className="text-4xl font-bold" style={{ color: 'hsl(var(--section-about-glow))' }}>About Me</h2>
           </div>
           
           <Card className="bg-card/30 backdrop-blur-sm border-border/50">
@@ -210,44 +210,47 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section className={`py-20 px-4 fade-in-section section-skills ${visibleSections.has('skills') ? 'visible' : ''}`} data-section="skills">
+      <section className={`py-20 px-4 fade-in-section ${visibleSections.has('skills') ? 'visible' : ''}`} data-section="skills">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
             <Code className="w-8 h-8" style={{ color: 'hsl(var(--section-skills-glow))' }} />
-            <h2 className="text-4xl font-bold">Skills</h2>
+            <h2 className="text-4xl font-bold" style={{ color: 'hsl(var(--section-skills-glow))' }}>Skills</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skill, index) => (
-              <div key={skill.name} className="skill-card" style={{ animationDelay: `${index * 100}ms` }}>
+              <div 
+                key={skill.name} 
+                className={`skill-card skill-${skill.proficiency}`} 
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <skill.icon className="w-6 h-6" style={{ color: 'hsl(var(--section-skills-glow))' }} />
+                    <skill.icon 
+                      className="w-6 h-6" 
+                      style={{ 
+                        color: skill.proficiency === 'expert' ? 'hsl(0 100% 50%)' :
+                               skill.proficiency === 'intermediate' ? 'hsl(35 100% 55%)' :
+                               'hsl(120 100% 50%)'
+                      }} 
+                    />
                     <h3 className="text-xl font-semibold">{skill.name}</h3>
                   </div>
                   <span className={`proficiency-${skill.proficiency}`}>
                     {skill.proficiency.charAt(0).toUpperCase() + skill.proficiency.slice(1)}
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  {[...Array(3)].map((_, i) => (
+                
+                {/* Progress Bar */}
+                <div className="relative">
+                  <div className="w-full bg-muted/30 rounded-full h-2">
                     <div 
-                      key={i} 
-                      className={`h-2 flex-1 rounded-full transition-all duration-1000 ${
-                        (skill.proficiency === 'expert' && i < 3) ||
-                        (skill.proficiency === 'intermediate' && i < 2) ||
-                        (skill.proficiency === 'beginner' && i < 1)
-                          ? 'bg-gradient-to-r from-current to-current/60' 
-                          : 'bg-muted'
-                      }`}
+                      className={`progress-bar progress-${skill.proficiency}`}
                       style={{
-                        color: skill.proficiency === 'expert' ? 'hsl(120 100% 50%)' :
-                               skill.proficiency === 'intermediate' ? 'hsl(45 100% 50%)' :
-                               'hsl(220 100% 60%)',
-                        transitionDelay: `${index * 150 + i * 100}ms`
+                        transitionDelay: `${index * 150}ms`
                       }}
                     />
-                  ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -256,7 +259,7 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section className={`py-20 px-4 fade-in-section section-projects ${visibleSections.has('projects') ? 'visible' : ''}`} data-section="projects">
+      <section className={`py-20 px-4 fade-in-section ${visibleSections.has('projects') ? 'visible' : ''}`} data-section="projects">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
             <Star className="w-8 h-8" style={{ color: 'hsl(var(--section-projects-glow))' }} />
@@ -339,7 +342,7 @@ const Index = () => {
       </section>
 
       {/* Experience Section */}
-      <section className={`py-20 px-4 fade-in-section section-experience ${visibleSections.has('experience') ? 'visible' : ''}`} data-section="experience">
+      <section className={`py-20 px-4 fade-in-section ${visibleSections.has('experience') ? 'visible' : ''}`} data-section="experience">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
             <Briefcase className="w-8 h-8" style={{ color: 'hsl(var(--section-experience-glow))' }} />

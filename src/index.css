@@ -237,25 +237,67 @@
     box-shadow: 0 0 15px hsl(220 100% 60% / 0.3);
   }
 
-  /* Section-specific backgrounds */
-  .section-about {
-    background: linear-gradient(135deg, hsl(var(--section-about) / 0.1), hsl(var(--section-about) / 0.05));
-    border-color: hsl(var(--section-about) / 0.3);
+  /* Skill proficiency themes */
+  .skill-expert {
+    --skill-color: 0 100% 50%; /* Red */
+    --skill-glow: 0 100% 60%;
   }
 
-  .section-skills {
-    background: linear-gradient(135deg, hsl(var(--section-skills) / 0.1), hsl(var(--section-skills) / 0.05));
-    border-color: hsl(var(--section-skills) / 0.3);
+  .skill-intermediate {
+    --skill-color: 35 100% 55%; /* Yellowish-orange */
+    --skill-glow: 35 100% 65%;
   }
 
-  .section-projects {
-    background: linear-gradient(135deg, hsl(var(--section-projects) / 0.1), hsl(var(--section-projects) / 0.05));
-    border-color: hsl(var(--section-projects) / 0.3);
+  .skill-beginner {
+    --skill-color: 120 100% 50%; /* Green */
+    --skill-glow: 120 100% 60%;
   }
 
-  .section-experience {
-    background: linear-gradient(135deg, hsl(var(--section-experience) / 0.1), hsl(var(--section-experience) / 0.05));
-    border-color: hsl(var(--section-experience) / 0.3);
+  .skill-card.skill-expert {
+    border-color: hsl(var(--skill-color) / 0.3);
+  }
+
+  .skill-card.skill-expert:hover {
+    border-color: hsl(var(--skill-color) / 0.6);
+    box-shadow: 0 0 20px hsl(var(--skill-color) / 0.3);
+  }
+
+  .skill-card.skill-intermediate {
+    border-color: hsl(var(--skill-color) / 0.3);
+  }
+
+  .skill-card.skill-intermediate:hover {
+    border-color: hsl(var(--skill-color) / 0.6);
+    box-shadow: 0 0 20px hsl(var(--skill-color) / 0.3);
+  }
+
+  .skill-card.skill-beginner {
+    border-color: hsl(var(--skill-color) / 0.3);
+  }
+
+  .skill-card.skill-beginner:hover {
+    border-color: hsl(var(--skill-color) / 0.6);
+    box-shadow: 0 0 20px hsl(var(--skill-color) / 0.3);
+  }
+
+  /* Progress bar styles */
+  .progress-bar {
+    @apply h-2 rounded-full transition-all duration-1000;
+  }
+
+  .progress-expert {
+    background: linear-gradient(90deg, hsl(0 100% 50%), hsl(0 100% 60%));
+    width: 100%;
+  }
+
+  .progress-intermediate {
+    background: linear-gradient(90deg, hsl(35 100% 55%), hsl(35 100% 65%));
+    width: 75%;
+  }
+
+  .progress-beginner {
+    background: linear-gradient(90deg, hsl(120 100% 50%), hsl(120 100% 60%));
+    width: 50%;
   }
 
   /* Project cards */
