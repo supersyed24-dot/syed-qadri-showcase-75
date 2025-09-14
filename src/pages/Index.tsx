@@ -1,35 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, FileText, Code, Palette, Globe, User, Briefcase, GraduationCap, Mail, Check } from "lucide-react";
+import { Github, Linkedin, FileText, Code, Palette, Globe, User, Briefcase, GraduationCap, Mail, Check, ExternalLink, Star } from "lucide-react";
 const Index = () => {
-  const [showSocialButtons, setShowSocialButtons] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [emailCopied, setEmailCopied] = useState(false);
 
   useEffect(() => {
-    let scrollTimer: NodeJS.Timeout;
-    const isMobile = window.innerWidth <= 768;
-
     const handleScroll = () => {
-      const scrolled = window.scrollY > 100;
-      
-      if (isMobile) {
-        // On mobile: show only while actively scrolling
-        setShowSocialButtons(scrolled);
-        
-        // Clear existing timer
-        clearTimeout(scrollTimer);
-        
-        // Hide buttons after scrolling stops
-        scrollTimer = setTimeout(() => {
-          setShowSocialButtons(false);
-        }, 1000);
-      } else {
-        // On desktop: keep existing behavior
-        setShowSocialButtons(scrolled);
-      }
-
       // Check which sections are visible
       const sections = document.querySelectorAll('.fade-in-section');
       const newVisibleSections = new Set<string>();
@@ -51,7 +29,6 @@ const Index = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimer);
     };
   }, []);
 
@@ -67,51 +44,51 @@ const Index = () => {
   const skills = [{
     name: "Python",
     icon: Code,
-    level: 100
+    proficiency: "expert"
   }, {
     name: "Microsoft Office",
     icon: FileText,
-    level: 100
+    proficiency: "expert"
   }, {
     name: "HTML/CSS",
     icon: Palette,
-    level: 90
-  }, {
-    name: "Web Design",
-    icon: Palette,
-    level: 90
-  }, {
-    name: "JavaScript",
-    icon: Code,
-    level: 90
-  }, {
-    name: "Node.js",
-    icon: Code,
-    level: 90
-  }, {
-    name: "Power BI",
-    icon: Globe,
-    level: 80
-  }, {
-    name: "Tableau",
-    icon: Globe,
-    level: 80
+    proficiency: "expert"
   }, {
     name: "MySQL",
     icon: Code,
-    level: 80
+    proficiency: "expert"
+  }, {
+    name: "Web Design",
+    icon: Palette,
+    proficiency: "intermediate"
+  }, {
+    name: "JavaScript",
+    icon: Code,
+    proficiency: "intermediate"
+  }, {
+    name: "Node.js",
+    icon: Code,
+    proficiency: "intermediate"
+  }, {
+    name: "Power BI",
+    icon: Globe,
+    proficiency: "intermediate"
+  }, {
+    name: "Tableau",
+    icon: Globe,
+    proficiency: "intermediate"
   }, {
     name: "TypeScript",
     icon: Code,
-    level: 80
+    proficiency: "intermediate"
   }, {
     name: "React",
     icon: Code,
-    level: 75
+    proficiency: "intermediate"
   }, {
     name: "Git",
     icon: Code,
-    level: 70
+    proficiency: "beginner"
   }];
   const education = [{
     title: "Our Lady of Mount Carmel",
@@ -121,29 +98,81 @@ const Index = () => {
     icon: GraduationCap
   }];
   const experiences = [{
-    title: "Personal Projects and Online Courses",
-    organization: "Self-Directed Learning",
-    period: "2020 - present",
-    description: "Continuously expanding technical skills through hands-on projects and comprehensive online coursework.",
-    icon: Code
-  }, {
     title: "Freelance Developer",
     organization: "Python & Web Developer",
     period: "2023 - present",
-    description: "Created custom projects in Python and completed small web development tasks using HTML and CSS.",
+    description: [
+      "Gained experience developing diverse projects in Python, applying the language to tasks such as problem-solving, automation, and process optimization, while strengthening logical thinking and coding efficiency",
+      "Worked with HTML and CSS to design and enhance web features, focusing on structure, responsiveness, and user-friendly layouts",
+      "Built a strong foundation in both programming and front-end development",
+      "Managed tasks independently and adapted solutions to meet varying requirements"
+    ],
     icon: Code
   }, {
     title: "Merchandiser Co-op",
     organization: "Shoppers Drug Mart",
     period: "Sept 2023 – July 2024",
-    description: "Provided excellent customer service by assisting shoppers and addressing inquiries, while managing inventory, restocking shelves, and maintaining merchandising standards. Organized the backroom, monitored product quality and expiry dates, and collaborated with team members to ensure smooth store operations and efficient task completion.",
+    description: [
+      "Delivered exceptional customer service by assisting shoppers at checkout and answering product-related inquiries in a friendly and professional manner",
+      "Stocked and restocked shelves, rotated products by expiry dates, and ensured compliance with store merchandising standards",
+      "Organized and maintained the backroom by managing overstock and preparing items for shelf display",
+      "Monitored inventory and conducted regular checks to ensure proper product facing, expiry tracking, and packaging integrity (bailor box compliance)",
+      "Collaborated with team members during busy hours to ensure smooth store operations and timely completion of tasks"
+    ],
     icon: Briefcase
   }, {
     title: "Lead Coordinator",
     organization: "MNN Volunteer",
     period: "Jan 2023 - Dec 2023",
-    description: "Led and managed community events by coordinating logistics, overseeing volunteers, and ensuring smooth execution. Directed outreach efforts to boost engagement and managed budgets with careful financial oversight, demonstrating strong leadership, organization, and project management skills.",
+    description: [
+      "Led and managed community events, coordinating logistics from planning to execution",
+      "Supervised and guided volunteers, delegating tasks to ensure smooth operations",
+      "Directed outreach efforts through surveys and engagement strategies to boost participation",
+      "Managed event budgets and tracked expenses with accuracy and responsibility",
+      "Demonstrated strong leadership, organization, and project management skills by balancing multiple priorities and ensuring successful outcomes"
+    ],
     icon: User
+  }];
+
+  const projects = [{
+    title: "Skyguard Roofing Company Professional Website",
+    technologies: ["HTML/CSS", "JavaScript", "API"],
+    description: [
+      "Designed and developed a professional company website using HTML, CSS, and JavaScript",
+      "Built a service showcase page allowing visitors to view all offerings in a clean, user-friendly layout",
+      "Integrated a quote request and booking system, enabling customers to easily schedule services online",
+      "Added a customer reviews section to highlight client feedback and build trust",
+      "Focused on responsive design, ensuring seamless performance across desktop and mobile devices",
+      "Delivered a modern, functional, and visually appealing site that enhanced the company's online presence and customer engagement"
+    ],
+    link: "https://github.com/qadrisyedd/Skyguard-Roofing.git",
+    icon: Globe
+  }, {
+    title: "Essentials",
+    technologies: ["Python"],
+    description: [
+      "Developed a multi-functional desktop application using Python and Tkinter to enhance productivity and minimize distractions",
+      "Includes a suite of essential tools, such as a music player, to-do list, calculator, notes, whiteboard, password generator, and stopwatch",
+      "Designed an intuitive and user-friendly interface, allowing seamless navigation between individual apps",
+      "Implemented features to improve focus and efficiency, helping users manage tasks, track time, and organize information in one centralized application",
+      "Built modular and maintainable code to allow for easy updates and future expansions"
+    ],
+    link: "#",
+    icon: Code
+  }, {
+    title: "Cipher Program",
+    technologies: ["Python"],
+    description: [
+      "Developed a Python program that encrypts and decrypts messages using a 4-digit PIN and a simple shift cipher",
+      "Allows users to encrypt messages by inputting a lowercase text and a valid 4-digit PIN",
+      "Enables decryption of previously encrypted messages with the correct PIN",
+      "Implemented input validation to ensure only lowercase letters and valid PINs are accepted",
+      "Provides a user-friendly interface with clear instructions and robust error handling",
+      "Features a menu-driven program flow allowing users to choose between encryption, decryption, or exiting the application",
+      "Designed for simplicity and security, helping users manage basic encrypted communications effectively"
+    ],
+    link: "#",
+    icon: Code
   }];
   return <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -158,25 +187,13 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Floating Social Buttons */}
-        <div className={`fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50 transition-all duration-500 ${showSocialButtons ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
-          <Button variant="outline" size="icon" className="social-button w-14 h-14" onClick={() => window.open('https://www.linkedin.com/in/qadri-syed/', '_blank')}>
-            <Linkedin className="w-6 h-6 golden-icon" />
-          </Button>
-          <Button variant="outline" size="icon" className="social-button w-14 h-14" onClick={() => window.open('https://github.com/qadrisyedd', '_blank')}>
-            <Github className="w-6 h-6 golden-icon" />
-          </Button>
-          <Button variant="outline" size="icon" className="social-button w-14 h-14" onClick={() => window.open('https://drive.google.com/file/d/1jWNYyh5000SAlwZWq1pIhyw2WCCXSsVP/view?usp=sharing', '_blank')}>
-            <FileText className="w-6 h-6 golden-icon" />
-          </Button>
-        </div>
       </section>
 
       {/* About Me Section */}
-      <section className={`py-20 px-4 fade-in-section ${visibleSections.has('about') ? 'visible' : ''}`} data-section="about">
+      <section className={`py-20 px-4 fade-in-section section-about ${visibleSections.has('about') ? 'visible' : ''}`} data-section="about">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
-            <User className="w-8 h-8 text-primary" />
+            <User className="w-8 h-8" style={{ color: 'hsl(var(--section-about-glow))' }} />
             <h2 className="text-4xl font-bold">About Me</h2>
           </div>
           
@@ -193,61 +210,167 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section className={`py-20 px-4 fade-in-section ${visibleSections.has('skills') ? 'visible' : ''}`} data-section="skills">
+      <section className={`py-20 px-4 fade-in-section section-skills ${visibleSections.has('skills') ? 'visible' : ''}`} data-section="skills">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
-            <Code className="w-8 h-8 text-primary" />
+            <Code className="w-8 h-8" style={{ color: 'hsl(var(--section-skills-glow))' }} />
             <h2 className="text-4xl font-bold">Skills</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill, index) => <div key={skill.name} className="skill-card" style={{
-            animationDelay: `${index * 100}ms`
-          }}>
-                <div className="flex items-center gap-3 mb-4">
-                  <skill.icon className="w-6 h-6 text-primary" />
-                  <h3 className="text-xl font-semibold">{skill.name}</h3>
+            {skills.map((skill, index) => (
+              <div key={skill.name} className="skill-card" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <skill.icon className="w-6 h-6" style={{ color: 'hsl(var(--section-skills-glow))' }} />
+                    <h3 className="text-xl font-semibold">{skill.name}</h3>
+                  </div>
+                  <span className={`proficiency-${skill.proficiency}`}>
+                    {skill.proficiency.charAt(0).toUpperCase() + skill.proficiency.slice(1)}
+                  </span>
                 </div>
-                <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-gradient-to-r from-primary to-primary/60 h-2 rounded-full transition-all duration-1000" style={{
-                width: visibleSections.has('skills') ? `${skill.level}%` : '0%',
-                transitionDelay: `${index * 150}ms`
-              }} />
+                <div className="flex items-center gap-2">
+                  {[...Array(3)].map((_, i) => (
+                    <div 
+                      key={i} 
+                      className={`h-2 flex-1 rounded-full transition-all duration-1000 ${
+                        (skill.proficiency === 'expert' && i < 3) ||
+                        (skill.proficiency === 'intermediate' && i < 2) ||
+                        (skill.proficiency === 'beginner' && i < 1)
+                          ? 'bg-gradient-to-r from-current to-current/60' 
+                          : 'bg-muted'
+                      }`}
+                      style={{
+                        color: skill.proficiency === 'expert' ? 'hsl(120 100% 50%)' :
+                               skill.proficiency === 'intermediate' ? 'hsl(45 100% 50%)' :
+                               'hsl(220 100% 60%)',
+                        transitionDelay: `${index * 150 + i * 100}ms`
+                      }}
+                    />
+                  ))}
                 </div>
-                <p className="text-sm text-muted-foreground mt-2">
-                  {skill.level}% Proficiency
-                </p>
-              </div>)}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section className={`py-20 px-4 fade-in-section section-projects ${visibleSections.has('projects') ? 'visible' : ''}`} data-section="projects">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-3 mb-12">
+            <Star className="w-8 h-8" style={{ color: 'hsl(var(--section-projects-glow))' }} />
+            <h2 className="text-4xl font-bold">Projects</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            {projects.map((project, index) => (
+              <Card key={index} className="project-card" style={{ animationDelay: `${index * 200}ms` }}>
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg" style={{ backgroundColor: 'hsl(var(--section-projects) / 0.2)', borderColor: 'hsl(var(--section-projects) / 0.3)' }}>
+                        <project.icon className="w-6 h-6" style={{ color: 'hsl(var(--section-projects-glow))' }} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies.map((tech, techIndex) => (
+                            <span 
+                              key={techIndex} 
+                              className="px-2 py-1 text-xs rounded-full"
+                              style={{ 
+                                backgroundColor: 'hsl(var(--section-projects) / 0.3)', 
+                                color: 'hsl(var(--section-projects-glow))',
+                                border: '1px solid hsl(var(--section-projects) / 0.5)'
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2 mb-6">
+                    {project.description.map((point, pointIndex) => (
+                      <div key={pointIndex} className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--section-projects-glow))' }} />
+                        <p className="text-sm text-muted-foreground leading-relaxed">{point}</p>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full hover:scale-105 transition-all duration-300"
+                    style={{ 
+                      borderColor: 'hsl(var(--section-projects) / 0.5)',
+                      color: 'hsl(var(--section-projects-glow))'
+                    }}
+                    onClick={() => window.open(project.link, '_blank')}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    View Project
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <Button
+              variant="outline"
+              size="lg"
+              className="hover:scale-105 transition-all duration-300"
+              style={{ 
+                borderColor: 'hsl(var(--section-projects) / 0.5)',
+                color: 'hsl(var(--section-projects-glow))'
+              }}
+              onClick={() => window.open('https://github.com/qadrisyedd', '_blank')}
+            >
+              <Github className="w-5 h-5 mr-2" />
+              View More Projects
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section className={`py-20 px-4 fade-in-section ${visibleSections.has('experience') ? 'visible' : ''}`} data-section="experience">
+      <section className={`py-20 px-4 fade-in-section section-experience ${visibleSections.has('experience') ? 'visible' : ''}`} data-section="experience">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
-            <Briefcase className="w-8 h-8 text-primary" />
+            <Briefcase className="w-8 h-8" style={{ color: 'hsl(var(--section-experience-glow))' }} />
             <h2 className="text-4xl font-bold">Experience</h2>
           </div>
           
           <div className="space-y-6">
-            {experiences.map((experience, index) => <Card key={index} className="bg-card/30 backdrop-blur-sm border-border/50 transition-all duration-300 hover:bg-card/50" style={{
-            animationDelay: `${index * 200}ms`
-          }}>
+            {experiences.map((experience, index) => (
+              <Card key={index} className="bg-card/30 backdrop-blur-sm border-border/50 transition-all duration-300 hover:bg-card/50" style={{ animationDelay: `${index * 200}ms` }}>
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-primary/10 border border-primary/20">
-                      <experience.icon className="w-6 h-6 text-primary" />
+                    <div className="p-3 rounded-lg" style={{ backgroundColor: 'hsl(var(--section-experience) / 0.2)', borderColor: 'hsl(var(--section-experience) / 0.3)' }}>
+                      <experience.icon className="w-6 h-6" style={{ color: 'hsl(var(--section-experience-glow))' }} />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-semibold mb-1">{experience.title}</h3>
-                      <p className="text-primary font-medium mb-1">{experience.organization}</p>
-                      <p className="text-sm text-muted-foreground mb-3">{experience.period}</p>
-                      <p className="text-muted-foreground leading-relaxed">{experience.description}</p>
+                      <p className="font-medium mb-1" style={{ color: 'hsl(var(--section-experience-glow))' }}>{experience.organization}</p>
+                      <p className="text-sm text-muted-foreground mb-4">{experience.period}</p>
+                      <div className="space-y-2">
+                        {experience.description.map((point, pointIndex) => (
+                          <div key={pointIndex} className="flex items-start gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--section-experience-glow))' }} />
+                            <p className="text-muted-foreground leading-relaxed">{point}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>

@@ -47,6 +47,16 @@
     --rainbow-6: 271 100% 65%;   /* Purple */
     --rainbow-7: 300 100% 60%;   /* Pink */
 
+    /* Section Colors - Professional Dark Theme */
+    --section-about: 200 100% 25%;      /* Deep teal/cyan */
+    --section-about-glow: 180 100% 50%;
+    --section-skills: 120 60% 25%;      /* Deep green */
+    --section-skills-glow: 120 100% 50%;
+    --section-projects: 15 100% 30%;    /* Deep orange */
+    --section-projects-glow: 25 100% 60%;
+    --section-experience: 271 100% 30%; /* Deep purple */
+    --section-experience-glow: 271 100% 65%;
+
     /* Glow colors */
     --glow-primary: 271 100% 65%;
     --glow-secondary: 180 100% 50%;
@@ -209,6 +219,85 @@
 
   .skill-card:hover::before {
     left: 100%;
+  }
+
+  /* Proficiency Badges */
+  .proficiency-expert {
+    @apply bg-gradient-to-r from-green-600 to-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg;
+    box-shadow: 0 0 15px hsl(120 100% 50% / 0.3);
+  }
+
+  .proficiency-intermediate {
+    @apply bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg;
+    box-shadow: 0 0 15px hsl(45 100% 50% / 0.3);
+  }
+
+  .proficiency-beginner {
+    @apply bg-gradient-to-r from-blue-600 to-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg;
+    box-shadow: 0 0 15px hsl(220 100% 60% / 0.3);
+  }
+
+  /* Section-specific backgrounds */
+  .section-about {
+    background: linear-gradient(135deg, hsl(var(--section-about) / 0.1), hsl(var(--section-about) / 0.05));
+    border-color: hsl(var(--section-about) / 0.3);
+  }
+
+  .section-skills {
+    background: linear-gradient(135deg, hsl(var(--section-skills) / 0.1), hsl(var(--section-skills) / 0.05));
+    border-color: hsl(var(--section-skills) / 0.3);
+  }
+
+  .section-projects {
+    background: linear-gradient(135deg, hsl(var(--section-projects) / 0.1), hsl(var(--section-projects) / 0.05));
+    border-color: hsl(var(--section-projects) / 0.3);
+  }
+
+  .section-experience {
+    background: linear-gradient(135deg, hsl(var(--section-experience) / 0.1), hsl(var(--section-experience) / 0.05));
+    border-color: hsl(var(--section-experience) / 0.3);
+  }
+
+  /* Project cards */
+  .project-card {
+    @apply relative overflow-hidden rounded-xl bg-card/40 backdrop-blur-sm border border-border/50 p-6 transition-all duration-500 hover:scale-105 hover:bg-card/60;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--section-projects) / 0.2), transparent);
+    transition: left 0.7s;
+  }
+
+  .project-card:hover::before {
+    left: 100%;
+  }
+
+  /* Social buttons in hero */
+  .hero-social-button {
+    @apply relative overflow-hidden rounded-full bg-card/20 backdrop-blur-sm border border-border/30 p-4 transition-all duration-300 hover:scale-110 hover:bg-card/40 hover:border-primary/50;
+  }
+
+  .hero-social-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.2), transparent);
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-social-button:hover::before {
+    width: 200px;
+    height: 200px;
   }
 }
 
